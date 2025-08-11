@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>MediaShelf</title>
+  <link rel="stylesheet" href="/styles.css" />
+</head>
+<body>
+  <header class="topbar">
+    <div class="brand">📚🎬 MediaShelf</div>
+    <div class="spacer"></div>
+    <div id="me" class="me"></div>
+    <button id="logoutBtn" class="ghost">Logout</button>
+  </header>
+
+  <main class="grid">
+    <section class="panel">
+      <h2>Movies</h2>
+      <ul id="movies" class="grid-list"></ul>
+    </section>
+
+    <section class="panel">
+      <h2>Books</h2>
+      <ul id="books" class="grid-list"></ul>
+    </section>
+
+    <section class="panel">
+      <h2>Add to Library</h2>
+      <form id="uploadForm" class="card">
+        <label>Type
+          <select name="type" required>
+            <option value="movie">Movie</option>
+            <option value="book">Book</option>
+          </select>
+        </label>
+        <label>Title
+          <input type="text" name="title" required />
+        </label>
+        <label>Year (optional)
+          <input type="number" name="year" min="1800" max="2100" />
+        </label>
+        <label>Author (books) or Director (movies)
+          <input type="text" name="person" placeholder="e.g., Andy Weir or Andrew Stanton" />
+        </label>
+        <label>Drive/File URL (optional)
+          <input type="url" name="driveUrl" placeholder="https://drive.google.com/..." />
+        </label>
+        <button type="submit">Add</button>
+        <p id="uploadError" class="error"></p>
+      </form>
+    </section>
+
+    <section class="panel wide">
+      <h2>Activity</h2>
+      <ul id="activity" class="activity"></ul>
+    </section>
+  </main>
+
+  <script src="/app.js"></script>
+</body>
+</html>

@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>MediaShelf — Login</title>
+  <link rel="stylesheet" href="/styles.css" />
+</head>
+<body>
+  <main class="container narrow">
+    <h1>MediaShelf</h1>
+    <p class="muted">Sign in with your name and the shared password.</p>
+    <form id="loginForm" class="card">
+      <label>Username
+        <input type="text" name="username" required placeholder="e.g., luke" autocomplete="username" />
+      </label>
+      <label>Password
+        <input type="password" name="password" required placeholder="Shared family password" autocomplete="current-password" />
+      </label>
+      <button type="submit">Sign in</button>
+      <p id="error" class="error" role="alert"></p>
+    </form>
+  </main>
+  <script>
+    const form = document.getElementById('loginForm');
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const fd = new FormData(form);
+      const payload = Object.fromEntries(fd.entries());
+      const res = await fetch('/api/login', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(payload) });
+      const data = await res.json();
+      if (!res.ok) {
+        document.getElementById('error').textContent = data.error || 'Login failed';
+        return;
+      }
+      window.location.href = '/app';
+    });
+  </script>
+</body>
+</html>
